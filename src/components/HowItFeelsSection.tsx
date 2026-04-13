@@ -16,7 +16,7 @@ export default function HowItFeelsSection() {
   return (
     <section
       ref={ref}
-      className="relative h-screen flex items-center justify-center px-6 sm:px-12 overflow-hidden bg-[#0C0800]"
+      className="relative h-screen flex items-center justify-center px-6 sm:px-12 overflow-hidden"
     >
       {/* ── WARM GLOW ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

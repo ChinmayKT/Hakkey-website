@@ -8,43 +8,43 @@ const DISHES = [
     emoji: "🍛",
     name: "South Thali",
     chef: "Yashas D.B.",
-    grad: "from-amber-50 via-orange-50 to-amber-100",
-    ring: "ring-orange-100",
+    grad: "from-amber-900/50 via-orange-950/60 to-amber-900/40",
+    ring: "ring-orange-800/30",
   },
   {
     emoji: "🫕",
     name: "Dal Makhani",
     chef: "Ramesh Kumar",
-    grad: "from-red-50 via-rose-50 to-red-100",
-    ring: "ring-red-100",
+    grad: "from-red-900/50 via-rose-950/60 to-red-900/40",
+    ring: "ring-red-800/30",
   },
   {
     emoji: "🥘",
     name: "Chole Bhature",
     chef: "Sunita Devi",
-    grad: "from-yellow-50 via-amber-50 to-yellow-100",
-    ring: "ring-yellow-100",
+    grad: "from-yellow-900/50 via-amber-950/60 to-yellow-900/40",
+    ring: "ring-yellow-800/30",
   },
   {
     emoji: "🍲",
     name: "Rasam Rice",
     chef: "Lakshmi Rao",
-    grad: "from-orange-50 via-amber-50 to-orange-100",
-    ring: "ring-orange-100",
+    grad: "from-orange-900/50 via-amber-950/60 to-orange-900/40",
+    ring: "ring-orange-800/30",
   },
   {
     emoji: "🧆",
     name: "Masala Dosa",
     chef: "Priya Iyer",
-    grad: "from-amber-50 via-yellow-50 to-amber-100",
-    ring: "ring-amber-100",
+    grad: "from-amber-900/50 via-yellow-950/60 to-amber-900/40",
+    ring: "ring-amber-800/30",
   },
   {
     emoji: "🍱",
     name: "Home Tiffin",
     chef: "Kavitha S.",
-    grad: "from-rose-50 via-pink-50 to-rose-100",
-    ring: "ring-rose-100",
+    grad: "from-rose-900/50 via-pink-950/60 to-rose-900/40",
+    ring: "ring-rose-800/30",
   },
 ];
 
@@ -85,7 +85,7 @@ function DishCard({
 
           {/* "Home-made" badge */}
           <div className="absolute top-3 left-3">
-            <span className="inline-flex items-center gap-1 bg-white/80 backdrop-blur-sm text-orange-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-orange-100/80 shadow-sm">
+            <span className="inline-flex items-center gap-1 bg-black/40 backdrop-blur-sm text-orange-400 text-[10px] font-bold px-2.5 py-1 rounded-full border border-orange-800/30 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" />
               Home-made
             </span>
@@ -94,10 +94,10 @@ function DishCard({
 
         {/* Info */}
         <div className="px-0.5">
-          <h3 className="font-bold text-foreground text-sm sm:text-base leading-snug group-hover:text-primary transition-colors duration-200">
+          <h3 className="font-bold text-white/85 text-sm sm:text-base leading-snug group-hover:text-orange-300 transition-colors duration-200">
             {dish.name}
           </h3>
-          <p className="mt-0.5 text-muted text-xs">by {dish.chef}</p>
+          <p className="mt-0.5 text-white/40 text-xs">by {dish.chef}</p>
         </div>
       </motion.div>
     </motion.div>
@@ -112,16 +112,8 @@ export default function DishesSection() {
     <section
       ref={ref}
       id="dishes"
-      className="relative min-h-screen flex flex-col justify-center bg-[#FAFAFA] px-6 sm:px-12 lg:px-20 py-24"
+      className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-24"
     >
-      {/* Very faint warm radial bg */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,107,0,0.03) 0%, transparent 70%)",
-        }}
-      />
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
 
@@ -133,7 +125,7 @@ export default function DishesSection() {
           className="mb-12 sm:mb-14"
         >
           <span className="section-label mb-4 block">The Menu</span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-[1.05] tracking-tight max-w-2xl">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white/90 leading-[1.05] tracking-tight max-w-2xl">
             Every dish
             <br />
             has a{" "}
@@ -141,7 +133,7 @@ export default function DishesSection() {
               story.
             </span>
           </h2>
-          <p className="mt-4 text-muted text-base sm:text-lg max-w-md leading-relaxed">
+          <p className="mt-4 text-white/45 text-base sm:text-lg max-w-md leading-relaxed">
             Cooked in a real kitchen, with real ingredients, by someone who truly loves to cook.
           </p>
         </motion.div>

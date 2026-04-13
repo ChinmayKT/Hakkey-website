@@ -29,12 +29,31 @@ html {
 }
 
 body {
-  background: var(--color-background);
+  /* ── Unified cinematic background ── */
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,120,0,0.15), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(92,26,27,0.25),  transparent 50%),
+    linear-gradient(180deg, #1a0c08 0%, #0f0503 100%);
+  background-size: 200% 200%;
+  animation: gradientFlow 20s ease infinite;
+  /* Fixed on desktop for parallax feel; scroll on iOS (fixed is broken there) */
+  background-attachment: fixed;
   color: var(--color-foreground);
   font-family: var(--font-sans), "Inter", system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* iOS Safari doesn't support background-attachment: fixed */
+@supports (-webkit-touch-callout: none) {
+  body { background-attachment: scroll; }
+}
+
+/* All sections are transparent windows onto the unified body canvas */
+section {
+  background: transparent;
+  position: relative;
 }
 
 /* ─────────────────────────────────────────
@@ -51,6 +70,12 @@ body {
 /* ─────────────────────────────────────────
    KEYFRAMES
 ───────────────────────────────────────── */
+@keyframes gradientFlow {
+  0%   { background-position: 30% 20%; }
+  50%  { background-position: 70% 60%; }
+  100% { background-position: 30% 20%; }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-10px); }
@@ -106,12 +131,46 @@ body {
   border-radius: 99px;
 }
 
+/* ─────────────────────────────────────────
+   HERO VIDEO — subject-aware cinematic fill
+   object-fit: cover handles all aspect ratios.
+   object-position biases cropping toward the
+   RIGHT side where the subject (lady) is.
+
+   70% center = recommended balanced right bias
+   Adjust if subject position changes.
+───────────────────────────────────────── */
+@keyframes heroKenBurns {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}
+
+.hero-video-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Bias cropping toward right — keeps subject in frame */
+  object-position: 70% center;
+  transform-origin: center center;
+  animation: heroKenBurns 20s ease-in-out infinite alternate;
+}
+
+/* Stronger right bias on portrait/mobile — more left cropped */
+@media (max-width: 768px) {
+  .hero-video-fill {
+    object-position: 80% center;
+  }
+}
+
 /* Glassmorphism card */
 .glass {
-  background: rgba(255,255,255,0.07);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
 }
 
 /* Premium card shadow */

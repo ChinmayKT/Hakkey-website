@@ -33,7 +33,7 @@ export default function CTASection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="download" ref={ref} className="relative overflow-hidden bg-[#111111]">
+    <section id="download" ref={ref} className="relative overflow-hidden">
       {/* ── ATMOSPHERE ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Central warm glow */}

@@ -58,7 +58,7 @@ export default function FoodShowcaseSection() {
     <section
       ref={sectionRef}
       id="food"
-      className="relative overflow-hidden bg-[#0D0D0D]"
+      className="relative overflow-hidden"
       style={{ paddingTop: "7rem", paddingBottom: "7rem" }}
     >
       {/* ── PARALLAX WARM ATMOSPHERE ── */}

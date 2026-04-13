@@ -32,7 +32,7 @@ export default function FinalCTASection() {
     <section
       ref={ref}
       id="download"
-      className="relative h-screen flex items-center justify-center px-6 sm:px-12 overflow-hidden bg-[#0D0800]"
+      className="relative h-screen flex items-center justify-center px-6 sm:px-12 overflow-hidden"
     >
       {/* ── ATMOSPHERE ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

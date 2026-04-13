@@ -6,30 +6,23 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative w-full h-screen min-h-[640px] overflow-hidden">
 
-      {/* ── VIDEO: slow Ken Burns zoom ── */}
-      <motion.div
-        className="absolute inset-0 w-full h-full"
-        initial={{ scale: 1 }}
-        animate={{ scale: 1.07 }}
-        transition={{ duration: 20, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+      {/* ── VIDEO: cinematic 16:9 fill — Ken Burns via CSS ── */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="hero-video-fill"
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover"
-        >
-          <source src="/videos/20260403_213444753.mp4" type="video/mp4" />
-        </video>
-      </motion.div>
+        <source src="/videos/20260403_213444753.mp4" type="video/mp4" />
+      </video>
 
       {/* ── OVERLAYS ── */}
-      {/* Left-heavy gradient for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
+      {/* Left-heavy gradient for text legibility — warm maroon tint */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1a0500]/88 via-[#0d0200]/52 to-transparent" />
       {/* Bottom vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#100300]/65 via-transparent to-[#0a0100]/18" />
       {/* Subtle grain */}
       <div
         className="absolute inset-0 opacity-[0.035] pointer-events-none"

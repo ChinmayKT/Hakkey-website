@@ -17,7 +17,7 @@ export default function RealHomeCookingSection() {
   return (
     <section
       ref={ref}
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-[#0C0800]"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
     >
       {/* ── PARALLAX WARM ATMOSPHERE ── */}
       <motion.div
