@@ -171,7 +171,7 @@ function ChefCard({
 
 export default function TopChefsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section id="chefs" ref={ref} className="py-24 sm:py-32 px-6 sm:px-12 lg:px-20 bg-foreground/[0.015]">

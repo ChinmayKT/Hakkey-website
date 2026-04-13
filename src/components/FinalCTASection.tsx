@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import ShimmerSpan from "./ShimmerSpan";
 
 const STORE_BUTTONS = [
   {
@@ -26,7 +27,7 @@ const STORE_BUTTONS = [
 
 export default function FinalCTASection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -76,9 +77,9 @@ export default function FinalCTASection() {
           >
             Bring home back
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
               to your plate.
-            </span>
+            </ShimmerSpan>
           </motion.h2>
 
           {/* Subtext */}

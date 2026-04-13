@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import ShimmerSpan from "./ShimmerSpan";
 
 // ── Link data ─────────────────────────────────────────────────────────────────
 const NAV_COLUMNS = [
@@ -59,14 +60,14 @@ export default function Footer() {
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: false, margin: "-100px" }}
           className="text-center"
         >
           <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-white/90 tracking-tight leading-[1.1]">
             Still craving{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
               home?
-            </span>
+            </ShimmerSpan>
           </h2>
           <p className="mt-4 text-sm sm:text-base font-light tracking-wide text-white/40">
             There&apos;s always a kitchen waiting for you.
@@ -78,7 +79,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: "easeOut", delay: 0.1 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: false, margin: "-100px" }}
           className="w-full glass rounded-[2rem] sm:rounded-[2.5rem] border border-white/[0.09] shadow-[0_40px_120px_rgba(0,0,0,0.55)] px-8 sm:px-12 lg:px-16 py-12 sm:py-14"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-6">
@@ -88,7 +89,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, margin: "-100px" }}
               className="flex flex-col gap-5"
             >
               <Link href="#hero" className="flex items-center gap-2.5 group w-fit">
@@ -111,7 +112,7 @@ export default function Footer() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 + colIdx * 0.08 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, margin: "-100px" }}
                 className="flex flex-col gap-4"
               >
                 <span className="text-[10px] uppercase tracking-[0.24em] font-semibold text-white/25">
@@ -142,7 +143,7 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, margin: "-100px" }}
           className="text-center flex flex-col gap-2"
         >
           <p className="text-[11px] uppercase tracking-[0.22em] text-white/20">

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import ShimmerSpan from "./ShimmerSpan";
 
 export default function RealHomeCookingSection() {
   const ref = useRef<HTMLElement>(null);
@@ -47,7 +48,7 @@ export default function RealHomeCookingSection() {
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="flex items-center justify-center gap-3 mb-10 origin-center"
         >
@@ -62,7 +63,7 @@ export default function RealHomeCookingSection() {
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] font-black text-white leading-[1.06] tracking-tight"
         >
@@ -70,16 +71,16 @@ export default function RealHomeCookingSection() {
           <br />
           Not factories.
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             Just real homes.
-          </span>
+          </ShimmerSpan>
         </motion.h2>
 
         {/* Underline accent */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ delay: 0.6, duration: 0.9, ease: "easeOut" }}
           className="mt-10 w-24 h-0.5 bg-gradient-to-r from-orange-500/50 via-amber-400/30 to-transparent mx-auto origin-left"
         />
@@ -88,7 +89,7 @@ export default function RealHomeCookingSection() {
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ delay: 0.55, duration: 0.7 }}
           className="mt-7 text-white/30 text-sm sm:text-base tracking-wide"
         >

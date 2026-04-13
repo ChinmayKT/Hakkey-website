@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // Quote split into words for staggered reveal
 const QUOTE_WORDS = "Like eating at home, even when you're not.".split(" ");
@@ -11,7 +11,15 @@ const HIGHLIGHT = "home,";
 
 export default function HowItFeelsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const [shimmerActive, setShimmerActive] = useState(false);
+
+  useEffect(() => {
+    if (isInView && !shimmerActive) {
+      const t = setTimeout(() => setShimmerActive(true), 1200);
+      return () => clearTimeout(t);
+    }
+  }, [isInView, shimmerActive]);
 
   return (
     <section
@@ -55,7 +63,7 @@ export default function HowItFeelsSection() {
               }}
               className={`inline-block mr-[0.22em] ${
                 word === HIGHLIGHT
-                  ? "text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-300"
+                  ? `shimmer-text ${shimmerActive ? "shimmer-active" : ""} text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-300`
                   : ""
               }`}
             >

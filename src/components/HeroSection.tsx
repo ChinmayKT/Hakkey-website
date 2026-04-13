@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import ShimmerSpan from "./ShimmerSpan";
+import BrandLogo from "./BrandLogo";
 
 export default function HeroSection() {
   return (
@@ -33,18 +35,8 @@ export default function HeroSection() {
         }}
       />
 
-      {/* ── LOGO (top-left, no navbar) ── */}
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="absolute top-7 left-6 sm:left-12 lg:left-20 z-20 flex items-center gap-2.5"
-      >
-        <div className="w-9 h-9 bg-gradient-to-br from-primary to-orange-400 rounded-xl flex items-center justify-center shadow-lg shadow-primary/30">
-          <span className="text-white font-black text-base">H</span>
-        </div>
-        <span className="text-white font-bold text-lg tracking-tight">Hakkey</span>
-      </motion.div>
+      {/* ── BRAND LOGO ── */}
+      <BrandLogo />
 
       {/* ── MAIN CONTENT ── */}
       <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-28 max-w-7xl mx-auto w-full">
@@ -70,33 +62,31 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: "easeOut", delay: 0.4 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-black text-white leading-[1.04] tracking-tight max-w-3xl"
+          className="text-7xl sm:text-8xl md:text-9xl lg:text-[8rem] xl:text-[13.5rem] font-black text-white leading-[1.04] tracking-tight max-w-3xl"
         >
-          Home Food
-          <br />
-          <span className="relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
-              Near You.
-            </span>
-            <motion.span
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 1.1 }}
-              className="absolute bottom-1 left-0 right-0 h-[3px] rounded-full bg-gradient-to-r from-orange-400/50 to-transparent origin-left"
-            />
-          </span>
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400" delay={1200}>
+            Hakkey
+          </ShimmerSpan>
         </motion.h1>
+
+        {/* Tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.55 }}
+          className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-white/80 tracking-tight"
+        >
+          Home Food Near You
+        </motion.p>
 
         {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.6 }}
-          className="mt-5 sm:mt-6 text-base sm:text-lg md:text-xl text-white/60 max-w-md leading-relaxed font-light"
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.7 }}
+          className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-white/60 max-w-md leading-relaxed font-light"
         >
-          Freshly prepared by home chefs with love &amp; care —
-          <br className="hidden sm:block" />
-          delivered straight to your door.
+          Freshly prepared by home chefs with love &amp; care.
         </motion.p>
 
         {/* CTA buttons */}

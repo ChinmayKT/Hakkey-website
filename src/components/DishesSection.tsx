@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import ShimmerSpan from "./ShimmerSpan";
 
 const DISHES = [
   {
@@ -106,7 +107,7 @@ function DishCard({
 
 export default function DishesSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -129,9 +130,9 @@ export default function DishesSection() {
             Every dish
             <br />
             has a{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               story.
-            </span>
+            </ShimmerSpan>
           </h2>
           <p className="mt-4 text-white/45 text-base sm:text-lg max-w-md leading-relaxed">
             Cooked in a real kitchen, with real ingredients, by someone who truly loves to cook.

@@ -2,13 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import ShimmerSpan from "./ShimmerSpan";
 
 /* ────────────────────────────────────────────────────────────────────────────
    SECTION 11 — REAL LIFE PAIN  (PG / Away from home)
 ──────────────────────────────────────────────────────────────────────────── */
 function S11_PGLife() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -55,9 +56,9 @@ function S11_PGLife() {
           className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-black text-white leading-[1.06] tracking-tight mt-3"
         >
           Why not try{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             OG food?
-          </span>
+          </ShimmerSpan>
         </motion.h2>
 
         {/* Subtext — two-beat emotional pull */}
@@ -113,7 +114,7 @@ const HEALTH_PILLARS = [
 
 function S12_HealthTrust() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -143,9 +144,9 @@ function S12_HealthTrust() {
           className="text-4xl sm:text-5xl lg:text-6xl xl:text-[5rem] font-black text-white leading-[1.06] tracking-tight"
         >
           Looking for clean,{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             gym-friendly
-          </span>{" "}
+          </ShimmerSpan>{" "}
           food?
         </motion.h2>
 
@@ -183,7 +184,7 @@ function S12_HealthTrust() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S13_Discovery() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -268,7 +269,7 @@ function S13_Discovery() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S14_GenZ() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -303,9 +304,9 @@ function S14_GenZ() {
           className="text-5xl sm:text-7xl lg:text-[6.5rem] xl:text-[8rem] font-black text-white leading-none tracking-tight"
         >
           Gen Z, you&apos;ve got{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             Hakkey.
-          </span>
+          </ShimmerSpan>
         </motion.h2>
 
         {/* Subtext — two lines, staggered */}

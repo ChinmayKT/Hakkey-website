@@ -30,7 +30,7 @@ function MiniStars() {
 
 export default function CTASection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section id="download" ref={ref} className="relative overflow-hidden">

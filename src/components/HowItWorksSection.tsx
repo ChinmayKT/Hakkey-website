@@ -55,7 +55,7 @@ function Step({
   isLast: boolean;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <motion.div
@@ -108,9 +108,9 @@ function Step({
 
 export default function HowItWorksSection() {
   const headerRef = useRef(null);
-  const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const isHeaderInView = useInView(headerRef, { once: false, margin: "-100px" });
   const ctaRef = useRef(null);
-  const isCtaInView = useInView(ctaRef, { once: true, margin: "-60px" });
+  const isCtaInView = useInView(ctaRef, { once: false, margin: "-100px" });
 
   return (
     <section id="how" className="py-24 sm:py-32 px-6 sm:px-12 lg:px-20 overflow-hidden">

@@ -75,7 +75,7 @@ function Stars({ count }: { count: number }) {
 
 export default function TestimonialsSection() {
   const headerRef = useRef(null);
-  const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const isHeaderInView = useInView(headerRef, { once: false, margin: "-100px" });
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -137,7 +137,7 @@ export default function TestimonialsSection() {
             key={t.name}
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ delay: 0.08 * i, duration: 0.55, ease: "easeOut" }}
             className="snap-start flex-shrink-0 w-[300px] sm:w-[360px]"
           >

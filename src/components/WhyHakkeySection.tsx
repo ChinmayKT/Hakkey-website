@@ -54,7 +54,7 @@ const STATS = [
 
 export default function WhyHakkeySection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section id="why" ref={ref} className="py-24 sm:py-32 px-6 sm:px-12 lg:px-20 overflow-hidden">

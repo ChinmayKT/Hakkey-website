@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import ShimmerSpan from "./ShimmerSpan";
 
 const POINTS = [
   {
@@ -29,7 +30,7 @@ const POINTS = [
 
 export default function WhySection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -49,9 +50,9 @@ export default function WhySection() {
         >
           <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-black text-white/90 leading-tight tracking-tight">
             Why{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Hakkey?
-            </span>
+            </ShimmerSpan>
           </h2>
         </motion.div>
 

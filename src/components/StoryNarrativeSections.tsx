@@ -2,13 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import ShimmerSpan from "./ShimmerSpan";
 
 /* ────────────────────────────────────────────────────────────────────────────
    SECTION 1 — AI VS HUMAN  (Hook / Problem)
 ──────────────────────────────────────────────────────────────────────────── */
 function S1_AIvsHuman() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -66,9 +67,9 @@ function S1_AIvsHuman() {
         >
           AI is taking jobs.
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             But it can&apos;t cook your food.
-          </span>
+          </ShimmerSpan>
         </motion.h2>
 
         <motion.p
@@ -91,7 +92,7 @@ const COOK_EARN_WORDS = ["Cook.", "Earn.", "Restart."];
 
 function S2_LayoffOpportunity() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -129,9 +130,13 @@ function S2_LayoffOpportunity() {
               initial={{ opacity: 0, y: 28 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, ease: "easeOut", delay: 0.36 + i * 0.16 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400"
             >
-              {word}
+              <ShimmerSpan
+                className="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400"
+                delay={900 + i * 300}
+              >
+                {word}
+              </ShimmerSpan>
             </motion.span>
           ))}
         </div>
@@ -154,7 +159,7 @@ function S2_LayoffOpportunity() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S3_NoRestaurant() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -188,9 +193,9 @@ function S3_NoRestaurant() {
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-black text-white leading-[1.06] tracking-tight"
           >
             You don&apos;t need a{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
               restaurant
-            </span>{" "}
+            </ShimmerSpan>{" "}
             to sell food.
           </motion.h2>
 
@@ -232,7 +237,7 @@ function S3_NoRestaurant() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S4_BuyerPain() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -310,7 +315,7 @@ function S4_BuyerPain() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S5_SideIncome() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -341,9 +346,9 @@ function S5_SideIncome() {
           className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-black text-white leading-[1.04] tracking-tight"
         >
           Looking for{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             side income?
-          </span>
+          </ShimmerSpan>
         </motion.h2>
 
         <motion.p
@@ -381,7 +386,7 @@ function S5_SideIncome() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S6_Craving() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -412,9 +417,9 @@ function S6_Craving() {
           className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.04] tracking-tight"
         >
           Craving{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             home-made food?
-          </span>
+          </ShimmerSpan>
         </motion.h2>
 
         <motion.p
@@ -444,7 +449,7 @@ function S6_Craving() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S7_Passion() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -479,7 +484,7 @@ function S7_Passion() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           className="text-[4.5rem] sm:text-[6rem] lg:text-[8rem] font-black text-white leading-none tracking-tight"
         >
-          Love cooking?
+          Love <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400" delay={800}>cooking?</ShimmerSpan>
         </motion.h2>
 
         <motion.p
@@ -500,7 +505,7 @@ function S7_Passion() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S8_Family() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -552,9 +557,9 @@ function S8_Family() {
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.06] tracking-tight"
           >
             Your mom cooks{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
               amazing food?
-            </span>
+            </ShimmerSpan>
           </motion.h2>
 
           <motion.p
@@ -576,7 +581,7 @@ function S8_Family() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S9_Decision() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -616,9 +621,9 @@ function S9_Decision() {
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.08] tracking-tight"
           >
             or{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
+            <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
               home food
-            </span>{" "}
+            </ShimmerSpan>{" "}
             within 10 km?
           </motion.h2>
         </div>
@@ -668,7 +673,7 @@ function S9_Decision() {
 ──────────────────────────────────────────────────────────────────────────── */
 function S10_Punchline() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -702,9 +707,9 @@ function S10_Punchline() {
           className="text-4xl sm:text-5xl lg:text-6xl xl:text-[5.25rem] font-black text-white leading-[1.06] tracking-tight"
         >
           Aunty&apos;s kitchen{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
+          <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-300 to-orange-400">
             beats
-          </span>{" "}
+          </ShimmerSpan>{" "}
           unhealthy fast food.
         </motion.h2>
 

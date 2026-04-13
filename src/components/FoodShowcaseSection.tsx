@@ -43,7 +43,7 @@ const FEATURES = [
 
 export default function FoodShowcaseSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: false, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

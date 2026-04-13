@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 export default function VideoSection() {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
   const [muted, setMuted] = useState(true);
 
   function toggleMute() {
