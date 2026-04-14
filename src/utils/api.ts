@@ -1,4 +1,5 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://13.60.157.59:5000";
 
 export const postEarlyAccess = async (data: {
   name: string;
