@@ -349,8 +349,6 @@ export default function PracticalNarrativeSections() {
     <>
       <S11_PGLife />
       <S12_HealthTrust />
-      <S13_Discovery />
-      <S14_GenZ />
     </>
   );
 }

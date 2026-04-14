@@ -742,15 +742,10 @@ export default function StoryNarrativeSections() {
   return (
     <>
       <S1_AIvsHuman />
-      <S2_LayoffOpportunity />
       <S3_NoRestaurant />
       <S4_BuyerPain />
-      <S5_SideIncome />
-      <S6_Craving />
-      <S7_Passion />
       <S8_Family />
       <S9_Decision />
-      <S10_Punchline />
     </>
   );
 }
