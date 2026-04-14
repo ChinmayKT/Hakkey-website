@@ -100,16 +100,16 @@ export default function FinalCTASection() {
             className="mt-10 flex flex-col sm:flex-row gap-3 justify-center"
           >
             {STORE_BUTTONS.map((btn) => (
-              <motion.a
+              <motion.button
                 key={btn.label}
-                href="#"
+                onClick={() => (window as unknown as Record<string, () => void>).__hakkeyEarlyAccess?.()}
                 whileHover={{
                   scale: 1.05,
                   y: -3,
                   boxShadow: "0 24px 48px rgba(255,107,0,0.18)",
                 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center justify-center gap-3.5 bg-white text-[#111111] rounded-2xl px-6 py-4 shadow-2xl shadow-black/25 transition-shadow"
+                className="flex items-center justify-center gap-3.5 bg-white text-[#111111] rounded-2xl px-6 py-4 shadow-2xl shadow-black/25 transition-shadow cursor-pointer"
               >
                 {btn.icon}
                 <div className="text-left">
@@ -118,7 +118,7 @@ export default function FinalCTASection() {
                   </div>
                   <div className="text-sm sm:text-base font-black leading-tight">{btn.label}</div>
                 </div>
-              </motion.a>
+              </motion.button>
             ))}
           </motion.div>
 

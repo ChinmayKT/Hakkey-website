@@ -183,7 +183,7 @@ function S3_NoRestaurant() {
             transition={{ duration: 0.6 }}
             className="section-label mb-8"
           >
-            For Sellers
+            For Chefs
           </motion.p>
 
           <motion.h2
@@ -192,11 +192,11 @@ function S3_NoRestaurant() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-black text-white leading-[1.06] tracking-tight"
           >
-            You don&apos;t need a{" "}
+            Start your{" "}
             <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
-              restaurant
+              food business
             </ShimmerSpan>{" "}
-            to sell food.
+            from home.
           </motion.h2>
 
           <motion.p
@@ -205,7 +205,7 @@ function S3_NoRestaurant() {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.35 }}
             className="mt-8 text-xl sm:text-2xl text-white/40 font-light leading-relaxed"
           >
-            Start your business from home.
+            No restaurant needed.
           </motion.p>
         </div>
 
@@ -256,7 +256,7 @@ function S4_BuyerPain() {
           transition={{ duration: 0.6 }}
           className="section-label mb-8"
         >
-          For Buyers
+          For Foodies
         </motion.p>
 
         <motion.h2
@@ -265,7 +265,7 @@ function S4_BuyerPain() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-black leading-[1.04] tracking-tight"
         >
-          <span className="text-white/45">Bored of the same</span>
+          <span className="text-white/45">Tired of the same</span>
           <br />
           <span className="text-white">restaurant food?</span>
         </motion.h2>
@@ -276,7 +276,7 @@ function S4_BuyerPain() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.38 }}
           className="mt-8 text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400"
         >
-          Try real home-made meals.
+          Discover real home-cooked meals.
         </motion.p>
 
         {/* Split comparison panels */}
@@ -558,7 +558,7 @@ function S8_Family() {
           >
             Your mom cooks{" "}
             <ShimmerSpan className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-400">
-              amazing food?
+              incredible food?
             </ShimmerSpan>
           </motion.h2>
 
@@ -568,7 +568,7 @@ function S8_Family() {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.42 }}
             className="mt-8 text-xl sm:text-2xl text-white/40 font-light leading-relaxed"
           >
-            Help her become a seller.
+            Help her become a chef on Hakkey.
           </motion.p>
         </div>
       </div>

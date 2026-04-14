@@ -6,10 +6,12 @@ import WhySection from "@/components/WhySection";
 import PracticalNarrativeSections from "@/components/PracticalNarrativeSections";
 import FinalCTASection from "@/components/FinalCTASection";
 import Footer from "@/components/Footer";
+import EarlyAccessPopup from "@/components/EarlyAccessPopup";
 
 export default function Home() {
   return (
     <main className="overflow-x-hidden">
+      <EarlyAccessPopup />
       <HeroSection />
       <StoryNarrativeSections />
       <RealHomeCookingSection />

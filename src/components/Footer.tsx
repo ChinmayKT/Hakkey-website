@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import ShimmerSpan from "./ShimmerSpan";
 
 // ── Link data ─────────────────────────────────────────────────────────────────
@@ -9,27 +10,27 @@ const NAV_COLUMNS = [
   {
     section: "Product",
     links: [
-      { label: "About", href: "#" },
-      { label: "How it works", href: "#why" },
-      { label: "Become a chef", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "About" },
+      { label: "How it works" },
+      { label: "Become a chef" },
+      { label: "Careers" },
     ],
   },
   {
     section: "Legal",
     links: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms & Conditions", href: "#" },
-      { label: "Refund Policy", href: "#" },
+      { label: "Privacy Policy" },
+      { label: "Terms & Conditions" },
+      { label: "Refund Policy" },
     ],
   },
   {
     section: "Connect",
     links: [
-      { label: "Instagram", href: "#" },
-      { label: "Twitter (X)", href: "#" },
-      { label: "LinkedIn", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Instagram" },
+      { label: "Twitter (X)" },
+      { label: "LinkedIn" },
+      { label: "Contact" },
     ],
   },
 ];
@@ -92,13 +93,14 @@ export default function Footer() {
               viewport={{ once: false, margin: "-100px" }}
               className="flex flex-col gap-5"
             >
-              <Link href="#hero" className="flex items-center gap-2.5 group w-fit">
-                <div className="w-9 h-9 bg-gradient-to-br from-primary to-orange-400 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20 transition-shadow duration-300 group-hover:shadow-orange-500/40">
-                  <span className="text-white font-black text-sm">H</span>
-                </div>
-                <span className="font-bold text-base transition-colors duration-300 text-white/50 group-hover:text-white/80">
-                  Hakkey
-                </span>
+              <Link href="#hero" className="group w-fit">
+                <Image
+                  src="/hakkey-logo.png"
+                  alt="Hakkey"
+                  width={160}
+                  height={54}
+                  className="transition-opacity duration-300 group-hover:opacity-80"
+                />
               </Link>
               <p className="text-sm leading-relaxed max-w-[180px] text-white/30">
                 Bringing home back to your plate.
@@ -119,16 +121,16 @@ export default function Footer() {
                   {section}
                 </span>
                 <ul className="flex flex-col gap-3">
-                  {links.map(({ label, href }) => (
+                  {links.map(({ label }) => (
                     <li key={label}>
-                      <Link
-                        href={href}
-                        className="group relative inline-block text-sm leading-none transition-colors duration-300 cursor-pointer text-white/35 hover:text-orange-300"
+                      <button
+                        onClick={() => (window as unknown as Record<string, () => void>).__hakkeyEarlyAccess?.()}
+                        className="group relative inline-block text-sm leading-none transition-colors duration-300 cursor-pointer text-white/35 hover:text-orange-300 bg-transparent border-none p-0"
                       >
                         {label}
                         {/* Underline — slides left → right on hover */}
                         <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-orange-400 to-amber-300 group-hover:w-full transition-[width] duration-300 ease-out" />
-                      </Link>
+                      </button>
                     </li>
                   ))}
                 </ul>

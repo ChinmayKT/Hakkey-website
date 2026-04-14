@@ -19,10 +19,37 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Hakkey",
-  description: "Freshly prepared by home chefs with love & care.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://hakkey.in",
+  ),
+  title: "Hakkey – Home Food Near You",
+  description:
+    "Fresh home-cooked meals from nearby kitchens. Join early access today.",
   icons: {
     icon: "/icon.png",
+  },
+  openGraph: {
+    title: "Hakkey – Home Food Near You",
+    description:
+      "Fresh home-cooked meals from nearby kitchens. Join early access today.",
+    url: "/",
+    siteName: "Hakkey",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Hakkey – Home Food Near You",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hakkey – Home Food Near You",
+    description:
+      "Fresh home-cooked meals from nearby kitchens. Join early access today.",
+    images: ["/og-image.png"],
   },
 };
 

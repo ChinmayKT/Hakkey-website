@@ -16,14 +16,14 @@ const POINTS = [
     emoji: "✨",
     title: "Hygienic",
     description:
-      "Every chef on Hakkey is FSSAI certified and their kitchen is regularly inspected. No compromises.",
+      "Cooked with the same care and cleanliness as a home kitchen — just like your mom would.",
     delay: 0.25,
   },
   {
     emoji: "🌿",
     title: "Fresh Daily",
     description:
-      "No preservatives. No frozen shortcuts. Every order is prepared fresh — after you place it.",
+      "Food prepared as part of everyday home cooking, served fresh directly to you.",
     delay: 0.4,
   },
 ];
