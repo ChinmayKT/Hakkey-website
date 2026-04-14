@@ -289,7 +289,19 @@ export default function EarlyAccessPopup() {
                     whileTap={loading ? {} : { scale: 0.97 }}
                     className="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold text-sm sm:text-base rounded-xl px-6 py-4 shadow-[0_8px_32px_rgba(255,107,0,0.25)] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {loading ? <Spinner /> : "Reserve My Spot"}
+                    {loading ? <Spinner /> : (
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={userType}
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                          transition={{ duration: 0.15 }}
+                        >
+                          {userType === "chef" ? "Start My Chef Journey" : "Get Early Access"}
+                        </motion.span>
+                      </AnimatePresence>
+                    )}
                   </motion.button>
                 </form>
 
