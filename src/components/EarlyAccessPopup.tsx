@@ -15,6 +15,13 @@ function Spinner() {
   );
 }
 
+/* ── Ordinal helper ── */
+function ordinal(n: number): string {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
 /* ── Main Component ── */
 const POPUP_DELAY = 10_000; // 10 seconds
 const MAX_AUTO_OPENS = 3;
@@ -32,6 +39,11 @@ export default function EarlyAccessPopup() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [isInfoMsg, setIsInfoMsg] = useState(false);
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [shake, setShake] = useState(false);
+  const [position, setPosition] = useState<number | null>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoCountRef = useRef(0);
@@ -103,27 +115,53 @@ export default function EarlyAccessPopup() {
 
   function close() {
     setOpen(false);
+    setName("");
+    setPhone("");
+    setUserType("user");
+    setError("");
+    setIsInfoMsg(false);
+    setNameError("");
+    setPhoneError("");
+    setShake(false);
     if (!isDone()) startTimer();
+  }
+
+  /* ── Shake + vibrate helper ── */
+  function fireShake() {
+    setShake(true);
+    setTimeout(() => setShake(false), 400);
+    if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(200);
   }
 
   /* ── Validation + Submit ── */
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setIsInfoMsg(false);
+    setNameError("");
+    setPhoneError("");
 
     const trimmedName = name.trim();
-    const trimmedPhone = phone.trim();
+    const trimmedPhone = phone.replace(/\s/g, "");
 
-    if (!trimmedName) { setError("Name is required."); return; }
-    if (!/^\d{10}$/.test(trimmedPhone)) { setError("Enter a valid 10-digit phone number."); return; }
+    let hasError = false;
+    if (!trimmedName) { setNameError("Please enter your name"); hasError = true; }
+    if (!trimmedPhone) { setPhoneError("Phone number is required"); hasError = true; }
+    else if (!/^[6-9]\d{9}$/.test(trimmedPhone)) { setPhoneError("Enter a valid 10-digit mobile number"); hasError = true; }
+    if (hasError) { fireShake(); return; }
 
     setLoading(true);
     try {
-      await postEarlyAccess({ name: trimmedName, phone: trimmedPhone, type: userType });
+      const res = await postEarlyAccess({ name: trimmedName, phone: trimmedPhone, type: userType });
       try { localStorage.setItem(DONE_KEY, "true"); } catch { /* private browsing */ }
+      if (res.position) setPosition(res.position);
       setSuccess(true);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      const isDuplicate = msg.includes("already on the early access list");
+      setIsInfoMsg(isDuplicate);
+      setError(msg);
+      if (!isDuplicate) fireShake();
     } finally {
       setLoading(false);
     }
@@ -171,18 +209,40 @@ export default function EarlyAccessPopup() {
             {success ? (
               /* ── Success State ── */
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="text-center py-4"
               >
                 <div className="text-6xl mb-5">🎉</div>
                 <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
                   You&apos;re in!
                 </h3>
-                <p className="mt-3 text-white/45 text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
-                  We&apos;ll notify you before launch with exclusive benefits.
-                </p>
+                {position && userType === "chef" ? (
+                  <>
+                    <p className="mt-3 text-lg sm:text-xl text-orange-300 font-bold">
+                      You&apos;re the {ordinal(position)} home chef in our early access list.
+                    </p>
+                    <p className="mt-3 text-white/50 text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
+                      We&apos;ll notify you at launch 🚀
+                    </p>
+                    <p className="mt-2 text-white/35 text-xs sm:text-sm leading-relaxed max-w-xs mx-auto">
+                      Please respond to any calls or messages from the Hakkey team.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    {position && (
+                      <p className="mt-3 text-lg sm:text-xl text-orange-300 font-bold">
+                        You&apos;re the {ordinal(position)} user to get early access!
+                      </p>
+                    )}
+                    <p className="mt-3 text-white/50 text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
+                      We&apos;ll notify you as soon as we launch 🚀<br />
+                      You&apos;re part of our exclusive early community.
+                    </p>
+                  </>
+                )}
                 <button
                   onClick={close}
                   className="mt-8 text-sm text-white/30 hover:text-white/50 transition-colors underline underline-offset-4"
@@ -213,7 +273,7 @@ export default function EarlyAccessPopup() {
 
                 {/* Subtitle */}
                 <p className="mt-4 text-center text-white/40 text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
-                  Only <span className="text-white/65 font-semibold">100 users</span> &amp;{" "}
+                  Only <span className="text-white/65 font-semibold">first 100 users</span> &amp;{" "}
                   <span className="text-white/65 font-semibold">100 home chefs</span> will get exclusive launch benefits.
                 </p>
 
@@ -253,29 +313,51 @@ export default function EarlyAccessPopup() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-                  <input
-                    ref={nameRef}
-                    type="text"
-                    placeholder="Your Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-5 py-3.5 text-white text-sm placeholder:text-white/25 outline-none focus:border-orange-400/40 focus:ring-1 focus:ring-orange-400/20 transition-all"
-                  />
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    placeholder="Phone Number (10 digits)"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-5 py-3.5 text-white text-sm placeholder:text-white/25 outline-none focus:border-orange-400/40 focus:ring-1 focus:ring-orange-400/20 transition-all"
-                  />
+                  <div>
+                    <input
+                      ref={nameRef}
+                      type="text"
+                      placeholder="Your Name"
+                      value={name}
+                      onChange={(e) => { setName(e.target.value); setNameError(""); }}
+                      className={`w-full rounded-xl border bg-white/5 px-5 py-3.5 text-white text-sm placeholder:text-white/25 outline-none focus:border-orange-400/40 focus:ring-1 focus:ring-orange-400/20 transition-all ${nameError ? "border-red-400/60" : "border-white/10"}`}
+                    />
+                    {nameError && (
+                      <motion.p initial={{ opacity: 0, y: -2 }} animate={{ opacity: 1, y: 0 }} className="text-red-400/90 text-[11px] mt-1.5 ml-1">
+                        {nameError}
+                      </motion.p>
+                    )}
+                  </div>
+                  <div>
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      placeholder="Phone Number (10 digits)"
+                      value={phone}
+                      onChange={(e) => {
+                        const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+                        setPhone(digits);
+                        if (digits.length >= 1 && !/^[6-9]/.test(digits)) {
+                          setPhoneError("Enter a valid 10-digit mobile number");
+                        } else {
+                          setPhoneError("");
+                        }
+                      }}
+                      className={`w-full rounded-xl border bg-white/5 px-5 py-3.5 text-white text-sm placeholder:text-white/25 outline-none focus:border-orange-400/40 focus:ring-1 focus:ring-orange-400/20 transition-all ${phoneError ? "border-red-400/60" : "border-white/10"}`}
+                    />
+                    {phoneError && (
+                      <motion.p initial={{ opacity: 0, y: -2 }} animate={{ opacity: 1, y: 0 }} className="text-red-400/90 text-[11px] mt-1.5 ml-1">
+                        {phoneError}
+                      </motion.p>
+                    )}
+                  </div>
 
-                  {/* Error */}
+                  {/* Global error (API errors) */}
                   {error && (
                     <motion.p
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-red-400/90 text-xs text-center"
+                      className={`text-xs text-center ${isInfoMsg ? "text-emerald-400" : "text-red-400/90"}`}
                     >
                       {error}
                     </motion.p>
@@ -287,6 +369,8 @@ export default function EarlyAccessPopup() {
                     disabled={loading}
                     whileHover={loading ? {} : { scale: 1.03, y: -1 }}
                     whileTap={loading ? {} : { scale: 0.97 }}
+                    animate={shake ? { x: [0, -30, 30, -22, 22, -12, 12, 0] } : { x: 0 }}
+                    transition={shake ? { duration: 0.6, ease: "easeInOut" } : {}}
                     className="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold text-sm sm:text-base rounded-xl px-6 py-4 shadow-[0_8px_32px_rgba(255,107,0,0.25)] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {loading ? <Spinner /> : (
