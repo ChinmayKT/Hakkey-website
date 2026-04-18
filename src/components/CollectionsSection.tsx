@@ -69,7 +69,8 @@ export default function CollectionsSection() {
         </p>
       </motion.div>
 
-      <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 hide-scrollbar -mx-4 px-4 sm:-mx-0 sm:px-0">
+      <div className="overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 hide-scrollbar">
         {COLLECTIONS.map((item, i) => (
           <motion.div
             key={item.title}
@@ -85,6 +86,7 @@ export default function CollectionsSection() {
             <p className="text-muted text-xs sm:text-sm mt-1">{item.description}</p>
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );
