@@ -1,4 +1,5 @@
-export const API_BASE_URL = "http://localhost:4000";
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
 
 export const postEarlyAccess = async (data: {
   name: string;
@@ -9,7 +10,6 @@ export const postEarlyAccess = async (data: {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
     },
     body: JSON.stringify(data),
   });

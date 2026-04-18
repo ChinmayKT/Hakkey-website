@@ -148,9 +148,6 @@ export default function Footer() {
           viewport={{ once: false, margin: "-100px" }}
           className="text-center flex flex-col gap-2"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-white/20">
-            &copy; 2026 Hakkey Technologies Pvt. Ltd.
-          </p>
           <p className="text-[11px] tracking-wide text-white/15">
             Made with ❤️ in Bangalore
           </p>
