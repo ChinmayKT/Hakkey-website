@@ -1,4 +1,4 @@
-const PROD_API = 'http://api.hakkey.com/api/v1';
+const PROD_API = 'https://api.hakkey.com/api/v1';
 const DEV_API  = 'http://localhost:5000/api/v1';
 
 const API_BASE = process.env.NODE_ENV === 'development' ? DEV_API : PROD_API;

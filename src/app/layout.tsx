@@ -20,36 +20,41 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://hakkey.in",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://hakkey.com",
   ),
-  title: "Hakkey – Home Food Near You",
+  title: "India's Home Food Revolution Starts Here 🇮🇳",
   description:
-    "Fresh home-cooked meals from nearby kitchens. Join early access today.",
+    "Real home-cooked meals made with care, and a chance to earn from your own kitchen.",
   icons: {
     icon: "/icon.png",
   },
   openGraph: {
-    title: "Hakkey – Home Food Near You",
+    title: "India's Home Food Revolution Starts Here 🇮🇳",
     description:
-      "Fresh home-cooked meals from nearby kitchens. Join early access today.",
-    url: "/",
+      "Real home-cooked meals made with care, and a chance to earn from your own kitchen.",
+    url: "https://hakkey.com",
     siteName: "Hakkey",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Hakkey – Home Food Near You",
+        alt: "Hakkey - Home Food Marketplace",
       },
     ],
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hakkey – Home Food Near You",
+    title: "India's Home Food Revolution Starts Here 🇮🇳",
     description:
-      "Fresh home-cooked meals from nearby kitchens. Join early access today.",
+      "Real home-cooked meals made with care, and a chance to earn from your own kitchen.",
     images: ["/og-image.png"],
+    creator: "@hakkey",
+  },
+  alternates: {
+    canonical: "https://hakkey.com",
   },
 };
 
