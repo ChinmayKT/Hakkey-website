@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Hakkey",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Hakkey - Home Food Marketplace",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "India's Home Food Revolution Starts Here 🇮🇳",
     description:
       "Real home-cooked meals made with care, and a chance to earn from your own kitchen.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
     creator: "@hakkey",
   },
   alternates: {
