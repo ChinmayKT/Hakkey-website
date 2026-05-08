@@ -103,41 +103,111 @@ export default function HeroSection() {
           Freshly prepared by home chefs with love &amp; care.
         </motion.p>
 
-        {/* CTA buttons */}
+        {/* CTA buttons — three EQUAL-width pills via flex-1 + items-stretch.
+            Each carries identical inner anatomy: a centered icon stacked
+            above a single-line label. Same paddings, same radius, same
+            font scale → unified design system. The orange CTA's primacy
+            comes from chromatic weight + sparkle animation + shimmer,
+            never from being bigger. */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.8 }}
-          className="mt-10 flex flex-col sm:flex-row items-start gap-3.5"
+          className="mt-10 flex flex-row items-stretch justify-start gap-2 sm:gap-3 max-w-md sm:max-w-xl"
         >
+          {/* PRIMARY — Get Early Access */}
           <motion.button
             onClick={() => (window as unknown as Record<string, () => void>).__hakkeyEarlyAccess?.()}
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-4 bg-white text-foreground rounded-2xl px-6 py-4 shadow-2xl shadow-black/30 hover:shadow-orange-300/10 transition-shadow cursor-pointer"
+            className="group relative flex-1 flex flex-col items-center justify-center gap-1.5 sm:gap-2 overflow-hidden rounded-2xl px-2 py-3.5 sm:py-4 cursor-pointer min-w-0"
+            style={{
+              background: "linear-gradient(135deg, #FF8C38 0%, #FF6B00 50%, #D95A00 100%)",
+              boxShadow:
+                "0 1px 0 0 rgba(255,255,255,0.18) inset, 0 -1px 0 0 rgba(0,0,0,0.18) inset, 0 14px 38px -10px rgba(255,107,0,0.55), 0 8px 22px -8px rgba(0,0,0,0.6)",
+            }}
+            aria-label="Get Early Access"
           >
-            <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 010 1.38l-2.302 2.302L15.396 13l2.302-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302L5.864 2.658z" />
-            </svg>
-            <div>
-              <div className="text-[9px] text-foreground/40 uppercase tracking-widest font-medium">Get it on</div>
-              <div className="text-sm font-black leading-tight">Google Play</div>
-            </div>
+            {/* Shimmer sweep — clipped to button face */}
+            <motion.span
+              aria-hidden
+              className="absolute top-0 bottom-0 w-1/3 -skew-x-12 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
+              }}
+              animate={{ x: ["-160%", "360%"] }}
+              transition={{ duration: 3.2, repeat: Infinity, repeatDelay: 1.8, ease: "easeInOut" }}
+            />
+
+            {/* Specular bloom on hover */}
+            <span
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.25), transparent 60%)",
+              }}
+              aria-hidden
+            />
+
+            {/* Sparkle icon — rotates + pulses + glows */}
+            <motion.svg
+              className="relative w-6 h-6 sm:w-7 sm:h-7 shrink-0 text-white"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.15, 1],
+                filter: [
+                  "drop-shadow(0 0 0px rgba(255,235,180,0))",
+                  "drop-shadow(0 0 8px rgba(255,235,180,0.9))",
+                  "drop-shadow(0 0 0px rgba(255,235,180,0))",
+                ],
+              }}
+              transition={{
+                rotate: { duration: 5, repeat: Infinity, ease: "linear" },
+                scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                filter: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+              }}
+            >
+              <path d="M12 2l2.39 6.6L21 11l-6.61 2.4L12 20l-2.39-6.6L3 11l6.61-2.4L12 2z" />
+            </motion.svg>
+            <span className="relative text-xs sm:text-sm font-black leading-tight text-white whitespace-nowrap">
+              Early Access
+            </span>
           </motion.button>
 
+          {/* SECONDARY — Google Play */}
           <motion.button
             onClick={() => (window as unknown as Record<string, () => void>).__hakkeyEarlyAccess?.()}
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-4 bg-white text-foreground rounded-2xl px-6 py-4 shadow-2xl shadow-black/30 hover:shadow-orange-300/10 transition-shadow cursor-pointer"
+            className="flex-1 flex flex-col items-center justify-center gap-1.5 sm:gap-2 bg-white text-foreground rounded-2xl px-2 py-3.5 sm:py-4 shadow-2xl shadow-black/30 hover:shadow-orange-300/10 transition-shadow cursor-pointer min-w-0"
+            aria-label="Google Play"
           >
-            <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-6 h-6 sm:w-7 sm:h-7 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 010 1.38l-2.302 2.302L15.396 13l2.302-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302L5.864 2.658z" />
+            </svg>
+            <span className="text-xs sm:text-sm font-black leading-tight whitespace-nowrap">
+              Google Play
+            </span>
+          </motion.button>
+
+          {/* SECONDARY — App Store */}
+          <motion.button
+            onClick={() => (window as unknown as Record<string, () => void>).__hakkeyEarlyAccess?.()}
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex-1 flex flex-col items-center justify-center gap-1.5 sm:gap-2 bg-white text-foreground rounded-2xl px-2 py-3.5 sm:py-4 shadow-2xl shadow-black/30 hover:shadow-orange-300/10 transition-shadow cursor-pointer min-w-0"
+            aria-label="App Store"
+          >
+            <svg className="w-6 h-6 sm:w-7 sm:h-7 shrink-0" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
             </svg>
-            <div>
-              <div className="text-[9px] text-foreground/40 uppercase tracking-widest font-medium">Download on the</div>
-              <div className="text-sm font-black leading-tight">App Store</div>
-            </div>
+            <span className="text-xs sm:text-sm font-black leading-tight whitespace-nowrap">
+              App Store
+            </span>
           </motion.button>
         </motion.div>
       </div>

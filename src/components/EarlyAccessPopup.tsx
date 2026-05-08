@@ -24,11 +24,33 @@ function ordinal(n: number): string {
 
 /* ── Main Component ── */
 const POPUP_DELAY = 10_000; // 10 seconds
-const MAX_AUTO_OPENS = 3;
-const DONE_KEY = "hakkey_early_access_done";
+const DONE_KEY = "hakkey_early_access_done";              // permanent — set on submit
+const DISMISSED_KEY = "hakkey_early_access_dismissed_at"; // 7-day cooldown — set on close
+const DISMISS_COOLDOWN_DAYS = 7;
 
 function isDone() {
   try { return localStorage.getItem(DONE_KEY) === "true"; } catch { return false; }
+}
+
+function isDismissed() {
+  try {
+    const raw = localStorage.getItem(DISMISSED_KEY);
+    if (!raw) return false;
+    const dismissedAt = new Date(raw).getTime();
+    if (Number.isNaN(dismissedAt)) return false;
+    const cooldownMs = DISMISS_COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
+    return Date.now() - dismissedAt < cooldownMs;
+  } catch {
+    return false;
+  }
+}
+
+function markDismissed() {
+  try { localStorage.setItem(DISMISSED_KEY, new Date().toISOString()); } catch { /* private */ }
+}
+
+function clearDismissed() {
+  try { localStorage.removeItem(DISMISSED_KEY); } catch { /* private */ }
 }
 
 export default function EarlyAccessPopup() {
@@ -46,33 +68,53 @@ export default function EarlyAccessPopup() {
   const [position, setPosition] = useState<number | null>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const autoCountRef = useRef(0);
+  // Once flipped (by close, submit, or manual open), the auto-timer is
+  // permanently disabled for this mount. Combined with the localStorage
+  // flags it guarantees the auto-popup fires at most ONCE per session
+  // and never reschedules itself.
+  const autoFiredRef = useRef(false);
 
-  /* ── Timer logic ── */
-  const startTimer = useCallback(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    if (isDone()) return;
-    if (autoCountRef.current >= MAX_AUTO_OPENS) return;
+  /* ── One-shot auto-open ──
+     Fires at most once per mount, only if the user hasn't submitted or
+     dismissed within the cooldown. There is NO rescheduling anywhere —
+     the only way to see another auto-popup is to wait out the 7-day
+     cooldown (or clear localStorage). */
+  useEffect(() => {
+    if (autoFiredRef.current) return;
+    if (isDone() || isDismissed()) return;
+
     timerRef.current = setTimeout(() => {
-      if (isDone()) return;
-      setOpen((prev) => {
-        if (prev) return prev;
-        autoCountRef.current += 1;
-        return true;
-      });
+      if (autoFiredRef.current || isDone() || isDismissed()) return;
+      autoFiredRef.current = true;
+      setOpen(true);
     }, POPUP_DELAY);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
   }, []);
 
-  /* ── Start timer on mount ── */
-  useEffect(() => {
-    startTimer();
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [startTimer]);
-
-  /* ── Public trigger (called from CTA clicks) ── */
+  /* ── Public trigger (called from every CTA on the site) ──
+     Manual clicks ALWAYS open the popup. Even if the user previously
+     submitted (DONE_KEY) or dismissed (DISMISSED_KEY), an explicit CTA
+     click is a fresh request and overrides those flags. We also clear
+     the dismissal cooldown so the popup feels fully responsive after
+     manual interaction. Backend handles duplicate submissions
+     gracefully (green "already on the list" message). */
   const trigger = useCallback(() => {
-    if (isDone()) return;
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    autoFiredRef.current = true; // suppress racing auto-fire after manual open
+    clearDismissed();
+    setSuccess(false);
+    setPosition(null);
+    setError("");
+    setIsInfoMsg(false);
     setOpen(true);
   }, []);
 
@@ -123,7 +165,15 @@ export default function EarlyAccessPopup() {
     setNameError("");
     setPhoneError("");
     setShake(false);
-    if (!isDone()) startTimer();
+    // Stamp the dismissal so the auto-timer never fires again until the
+    // 7-day cooldown elapses. Skip if user already submitted — DONE_KEY
+    // is permanent and supersedes the dismissal flag.
+    if (!isDone()) markDismissed();
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    autoFiredRef.current = true;
   }
 
   /* ── Shake + vibrate helper ── */
